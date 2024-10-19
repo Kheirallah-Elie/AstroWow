@@ -1,8 +1,11 @@
 // firebaseConfig.js
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth"; // Import Firebase Auth
+import { initializeApp } from 'firebase/app';
+import { getAuth, initializeAuth, getReactNativePersistence } from 'firebase/auth';
+import { getDatabase } from 'firebase/database';
+import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 
-// Your web app's Firebase configuration
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyAc-Buw-fEXcCTF2h_KTSs1UcE4zFJ-lLA",
   authDomain: "mobile2astrowow.firebaseapp.com",
@@ -13,8 +16,16 @@ const firebaseConfig = {
   measurementId: "G-36MMQEECXF"
 };
 
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app); // Initialize Auth
 
-export { auth }; // Export the auth object
+// Initialize Firebase Auth with AsyncStorage
+const auth = initializeAuth(app, {
+    persistence: getReactNativePersistence(AsyncStorage)
+});
+
+// Initialize Firebase Database
+const database = getDatabase(app);
+
+export { auth, database };

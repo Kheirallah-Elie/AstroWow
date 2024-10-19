@@ -1,3 +1,4 @@
+// app/layout.tsx or RootLayout.js
 import React from 'react';
 import { Tabs } from 'expo-router';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
@@ -9,23 +10,22 @@ import { ImageBackground, StyleSheet } from 'react-native';
 export default function RootLayout() {
   const colorScheme = useColorScheme();
 
-  // Define your colors
-  const inactiveColor = 'white'; // Striking white color for inactive state
-  const activeColor = 'cyan'; // Striking yellow color for active state
+  const inactiveColor = 'white';
+  const activeColor = 'cyan';
 
   return (
     <ImageBackground 
-      source={require('../assets/images/astro.jpg')} // Path to your background image
-      style={styles.background} // Apply styles
+      source={require('../assets/images/astro.jpg')}
+      style={styles.background}
     >
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: activeColor, // Set active tint color
-          tabBarInactiveTintColor: inactiveColor, // Set inactive tint color
+          tabBarActiveTintColor: activeColor,
+          tabBarInactiveTintColor: inactiveColor,
           headerShown: false,
           tabBarStyle: { 
-            backgroundColor: 'rgba(255, 255, 255, 0)', // Set a semi-transparent background for the tab bar
-            height: 100, // Set the desired height for the tab bar
+            backgroundColor: 'rgba(255, 255, 255, 0)',
+            height: 100,
           },
         }}>
         
@@ -66,11 +66,10 @@ export default function RootLayout() {
   );
 }
 
-// Styles for the background
 const styles = StyleSheet.create({
   background: {
-    flex: 1, // Ensure it takes up the whole screen
-    resizeMode: 'cover', // Cover the entire screen
-    justifyContent: 'center', // Center children
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
 });

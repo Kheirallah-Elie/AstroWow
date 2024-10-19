@@ -1,27 +1,34 @@
 // index.tsx
 import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
-import LoginPage from '../components/LoginPage'; // Adjust the import path if necessary
-import Signup from '../components/SignUp'; // Adjust the import path if necessary
+import LoginPage from '../components/LoginPage';
+import Signup from '../components/SignUpPage';
+import ProfilePage from '../components/ProfilePage'; // Import the ProfilePage
 
 const Index = () => {
-    const [isLoginPage, setIsLoginPage] = useState(true); // State to toggle between Login and Signup
+    const [currentPage, setCurrentPage] = useState("login"); // State to handle which page is shown
 
     const switchToSignup = () => {
-        setIsLoginPage(false); // Switch to Signup
+        setCurrentPage("signup"); // Switch to Signup
     };
 
     const switchToLogin = () => {
-        setIsLoginPage(true); // Switch back to Login
+        setCurrentPage("login"); // Switch back to Login
+    };
+
+    const onLoginSuccess = () => {
+        setCurrentPage("profile"); // Switch to Profile page on successful login
+    };
+
+    const handleLogout = () => {
+        setCurrentPage("login"); // Go back to Login on logout
     };
 
     return (
         <SafeAreaView style={styles.container}>
-            {isLoginPage ? (
-                <LoginPage onSwitchToSignup={switchToSignup} />
-            ) : (
-                <Signup onSwitchToLogin={switchToLogin} />
-            )}
+            {currentPage === "login" && <LoginPage onSwitchToSignup={switchToSignup} onLoginSuccess={onLoginSuccess} />}
+            {currentPage === "signup" && <Signup onSwitchToLogin={switchToLogin} />}
+            {currentPage === "profile" && <ProfilePage onLogout={handleLogout} />}
         </SafeAreaView>
     );
 };

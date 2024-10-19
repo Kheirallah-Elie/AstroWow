@@ -1,23 +1,22 @@
 // components/LoginPage.tsx
 import React, { useState } from "react";
 import { View, StyleSheet, TextInput, Button, Alert } from "react-native";
+import { auth } from '../firebaseConfig'; // Import Firebase Auth
+import { signInWithEmailAndPassword } from 'firebase/auth'; // Import Firebase method
 
-const LoginPage = ({ onSwitchToSignup }) => {
+const LoginPage = ({ onSwitchToSignup, onLoginSuccess }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const login = (email, password) => {
-        console.log("Logging in with:", email, password);
-        if (email === "test@example.com" && password === "password") {
-            Alert.alert("Login Successful", `Welcome, ${email}`);
-        } else {
-            Alert.alert("Login Failed", "Incorrect email or password");
-        }
-    };
-
-    const handleLogin = () => {
+    const handleLogin = async () => {
         if (email && password) {
-            login(email, password);
+            try {
+                await signInWithEmailAndPassword(auth, email, password); // Firebase login
+                Alert.alert("Login Successful", `Welcome, ${email}`);
+                onLoginSuccess(); // Navigate to the Profile page
+            } catch (error) {
+                Alert.alert("Login Failed", error.message);
+            }
         } else {
             Alert.alert("Please fill in all fields");
         }
@@ -41,7 +40,7 @@ const LoginPage = ({ onSwitchToSignup }) => {
                 secureTextEntry
             />
             <Button title="Login" onPress={handleLogin} />
-            <Button title="Not yet a member? Sign in here" onPress={onSwitchToSignup} />
+            <Button title="Not yet a member? Sign up here" onPress={onSwitchToSignup} />
         </View>
     );
 };
