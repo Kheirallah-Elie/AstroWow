@@ -1,9 +1,10 @@
 // components/ImageUpload.js
 import React, { useState } from 'react';
-import { View, Button, Alert, Image } from 'react-native';
+import { View, Text, Alert, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'; 
 import { database } from '../firebaseConfig'; // Import Firebase Config for the database
+import styles from './LayoutStyle'; // Import shared styles from LayoutStyle
 
 const ImageUpload = () => {
     const [selectedImage, setSelectedImage] = useState(null);
@@ -35,7 +36,6 @@ const ImageUpload = () => {
                 console.log('File available at', url);
 
                 // Optionally save the image URL to your database
-                // Example code to add the image URL to the database
                 const imageRef = dbRef(database, 'images').push();
                 await imageRef.set({ url });
             })
@@ -45,10 +45,19 @@ const ImageUpload = () => {
     };
 
     return (
-        <View>
-            <Button title="Pick an image from camera roll" onPress={pickImage} />
-            {selectedImage && <Image source={{ uri: selectedImage }} style={{ width: 200, height: 200 }} />}
-        </View>
+        <ImageBackground
+            source={{ uri: 'https://astro.ufl.edu/wp-content/uploads/sites/58/2022/08/Cosmic-Cliffs-jpg.jpg' }}
+            style={styles.backgroundImage}
+        >
+            <View style={styles.overlay}>
+                {/* Custom button with better visibility */}
+                <TouchableOpacity onPress={pickImage} style={styles.buttonStyle}>
+                    <Text style={styles.buttonText}>Pick an image from camera roll</Text>
+                </TouchableOpacity>
+
+                {selectedImage && <Image source={{ uri: selectedImage }} style={{ width: 200, height: 200, marginTop: 20 }} />}
+            </View>
+        </ImageBackground>
     );
 };
 

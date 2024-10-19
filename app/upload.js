@@ -1,16 +1,11 @@
-// app/screens/TabTwoScreen.js
 import React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
-import ImageGallery from '../components/ImageGallery';
-
-const Stack = createStackNavigator(); // Create Stack Navigator
+import ImageUpload from '../components/ImageUpload';
 
 export default function TabTwoScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <ImageGallery />
-
+      <ImageUpload />
     </SafeAreaView>
   );
 }

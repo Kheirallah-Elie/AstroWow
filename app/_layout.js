@@ -4,6 +4,7 @@ import { Tabs } from 'expo-router';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import Entypo from '@expo/vector-icons/Entypo';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { ImageBackground, StyleSheet } from 'react-native';
 
@@ -15,7 +16,7 @@ export default function RootLayout() {
 
   return (
     <ImageBackground 
-      source={require('../assets/images/astro.jpg')}
+      source={{ uri: 'https://astro.ufl.edu/wp-content/uploads/sites/58/2022/08/Cosmic-Cliffs-jpg.jpg' }}
       style={styles.background}
     >
       <Tabs
@@ -24,7 +25,7 @@ export default function RootLayout() {
           tabBarInactiveTintColor: inactiveColor,
           headerShown: false,
           tabBarStyle: { 
-            backgroundColor: 'rgba(255, 255, 255, 0)',
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
             height: 100,
           },
         }}>
@@ -59,6 +60,16 @@ export default function RootLayout() {
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="weather-cloudy" size={24} color={color} />
             ),
+          }}
+        />
+
+        {/* Weather Tab */}
+        <Tabs.Screen
+          name="upload"
+          options={{
+            title: 'Upload',
+            tabBarIcon: ({ color }) => (
+              <Entypo name="upload" size={24} color={color} />            ),
           }}
         />
       </Tabs>
