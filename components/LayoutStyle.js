@@ -51,7 +51,15 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     backgroundColor: '#4CAF50', // Green background for better contrast
-    paddingVertical: 12,
+    paddingVertical: 6,
+    paddingHorizontal: 24,
+    borderRadius: 10, // Rounded corners
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  exitButtonStyle: {
+    backgroundColor: 'red', // Green background for better contrast
+    paddingVertical: 6,
     paddingHorizontal: 24,
     borderRadius: 10, // Rounded corners
     alignItems: 'center',
@@ -89,6 +97,99 @@ const styles = StyleSheet.create({
     fontSize: 16,
     padding: 10,
     textAlign: 'center',
+  },
+  textInput: {
+    height: 40,
+    backgroundColor: "white",
+    width: "100%",
+    marginBottom: 10,
+    paddingHorizontal: 10,
+    alignItems: "center",
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 5,
+  },
+  wrapper: {
+    flex: 1,
+    justifyContent: 'center',  // Centers the content vertically
+    alignItems: 'center',      // Centers the content horizontally
+    width: "80%",              // Adjusts width of text inputs
+    alignSelf: 'center',       // Ensures the wrapper itself is centered horizontally
+  },
+  searchBar: {
+    marginBottom: 20,
+    backgroundColor: 'transparent',
+  },
+  searchInput: {
+    backgroundColor: '#fff',
+  },
+  imageContainer: {
+    flex: 1,
+    margin: 10,
+    padding: 10,
+    alignItems: 'center',
+    borderRadius: 8,
+    backgroundColor: 'rgba(240, 240, 240, 0.8)',
+  },
+  image: {
+    width: 150,
+    height: 150,
+    borderRadius: 8,
+  },
+  imageTitle: {
+    marginTop: 5,
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  likesCount: {
+    fontSize: 14,
+    marginTop: 5,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    width: '80%',
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 20,
+  },
+  modalImage: {
+    width: '100%',
+    height: 300,
+    borderRadius: 10,
+  },
+  titleContainer: {
+    marginVertical: 10,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    maxWidth: '100%',
+    overflow: 'hidden',
+  },
+  descriptionContainer: {
+    maxHeight: 45, // Limit height to show only a few lines
+    overflow: 'hidden',
+  },
+  descriptionText: {
+    fontSize: 14,
+    marginBottom: 5,
+  },
+  moreDetailsText: {
+    color: '#007BFF',
+    textDecorationLine: 'underline',
+    textAlign: 'center',
+  },
+  navigationButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
   },
 });
 

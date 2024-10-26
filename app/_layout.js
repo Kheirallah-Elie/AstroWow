@@ -12,11 +12,11 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
 
   const inactiveColor = 'white';
-  const activeColor = 'cyan';
+  const activeColor = 'red';
 
   return (
     <ImageBackground 
-      source={{ uri: 'https://astro.ufl.edu/wp-content/uploads/sites/58/2022/08/Cosmic-Cliffs-jpg.jpg' }}
+      source={{ uri: 'https://i.pinimg.com/originals/4d/0c/b4/4d0cb4649a49e7c40731fd268c242786.jpg' }}
       style={styles.background}
     >
       <Tabs
@@ -43,9 +43,9 @@ export default function RootLayout() {
 
         {/* Images Tab */}
         <Tabs.Screen
-          name="images"
+          name="image"
           options={{
-            title: 'Images',
+            title: 'Image',
             tabBarIcon: ({ color }) => (
               <FontAwesome5 name="images" size={24} color={color} />
             ),

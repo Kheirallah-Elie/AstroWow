@@ -10,7 +10,6 @@ export default function TabTwoScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ImageGallery />
-
     </SafeAreaView>
   );
 }

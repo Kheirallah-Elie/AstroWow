@@ -46,7 +46,7 @@ const ImageUpload = () => {
 
     return (
         <ImageBackground
-            source={{ uri: 'https://astro.ufl.edu/wp-content/uploads/sites/58/2022/08/Cosmic-Cliffs-jpg.jpg' }}
+            source={{ uri: 'https://img.freepik.com/free-vector/mobile-wallpaper-with-fluid-shapes_79603-599.jpg?t=st=1729757486~exp=1729761086~hmac=a36034be6992ab57dcebb5f7e55c07d6874f9a281e34084676852bb61f62048e&w=900' }}
             style={styles.backgroundImage}
         >
             <View style={styles.overlay}>

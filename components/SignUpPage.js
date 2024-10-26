@@ -1,8 +1,8 @@
-// components/Signup.tsx
 import React, { useState } from 'react';
-import { View, StyleSheet, TextInput, Button, Alert } from 'react-native';
+import { View, ImageBackground, TextInput, Text, Alert, TouchableOpacity } from 'react-native';
 import { auth } from '../firebaseConfig'; // Import the auth object
 import { createUserWithEmailAndPassword } from 'firebase/auth'; // Import Firebase Auth methods
+import styles from './LayoutStyle';
 
 const Signup = ({ onSwitchToLogin }) => {
     const [email, setEmail] = useState("");
@@ -22,47 +22,41 @@ const Signup = ({ onSwitchToLogin }) => {
     };
 
     return (
-        <View style={styles.wrapper}>
-            <TextInput
-                style={styles.textInput}
-                placeholder="Email"
-                value={email}
-                onChangeText={setEmail}
-                autoCapitalize="none"
-                keyboardType="email-address"
-            />
-            <TextInput
-                style={styles.textInput}
-                placeholder="Password"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry
-            />
-            <Button title="Sign Up" onPress={handleSignUp} />
-            <Button title="Already a member? Login here" onPress={onSwitchToLogin} />
-        </View>
+        <ImageBackground 
+            source={{ uri: 'https://img.freepik.com/free-vector/galaxy-background-vector-space-desktop-wallpaper_53876-136887.jpg?t=st=1729757615~exp=1729761215~hmac=513586a7b6ca3fc6945acb41a58b25df39b16d1d24d566043b54079c50d0d312&w=2000' }}
+            style={styles.backgroundImage}
+        >
+            <View style={styles.wrapper}>
+                <TextInput
+                    style={styles.textInput}
+                    placeholder="Choose your email"
+                    value={email}
+                    onChangeText={setEmail}
+                    autoCapitalize="none"
+                    keyboardType="email-address"
+                    placeholderTextColor="#888"
+                />
+                <TextInput
+                    style={styles.textInput}
+                    placeholder="Choose your password"
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry
+                    placeholderTextColor="#888" // Change this to any color you want
+                />
+                
+                {/* Custom Sign Up Button */}
+                <TouchableOpacity style={styles.buttonStyle} onPress={handleSignUp}>
+                    <Text style={styles.buttonText}>Sign Up</Text>
+                </TouchableOpacity>
+
+                {/* Switch to Login Button */}
+                <TouchableOpacity onPress={onSwitchToLogin}>
+                    <Text style={{ color: 'white', marginTop: 20 }}>Already a member? Login here</Text>
+                </TouchableOpacity>
+            </View>
+        </ImageBackground>
     );
 };
-
-const styles = StyleSheet.create({
-    wrapper: {
-        display: "flex",
-        flexDirection: "column",
-        width: "80%",
-        alignItems: "center",
-        justifyContent: "space-around",
-        height: 300, // Same height as Login Page
-    },
-    textInput: {
-        height: 40,
-        backgroundColor: "white",
-        width: "100%",
-        marginBottom: 10,
-        paddingHorizontal: 10,
-        borderColor: "#ccc",
-        borderWidth: 1,
-        borderRadius: 5,
-    },
-});
 
 export default Signup;

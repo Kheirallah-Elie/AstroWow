@@ -145,7 +145,7 @@ export default function WeatherForecast() {
 
   return (
     <ImageBackground
-      source={{ uri: 'https://astro.ufl.edu/wp-content/uploads/sites/58/2022/08/Cosmic-Cliffs-jpg.jpg' }}
+      source={{ uri: 'https://images.pexels.com/photos/209831/pexels-photo-209831.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2' }}
       style={styles.backgroundImage}
     >
       <View style={styles.overlay}>
@@ -157,6 +157,7 @@ export default function WeatherForecast() {
             onChangeText={handleCityChange}
             onSubmitEditing={() => fetchWeatherForecast(city)}
             returnKeyType="done"
+            placeholderTextColor="#888"
           />
 
           <TouchableOpacity style={styles.geoButton} onPress={fetchWeatherByGeolocation}>
