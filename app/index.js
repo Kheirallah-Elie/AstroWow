@@ -1,35 +1,42 @@
-// index.tsx
-import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
-import LoginPage from '../components/LoginPage';
-import Signup from '../components/SignUpPage';
-import ProfilePage from '../components/ProfilePage'; // Import the ProfilePage
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { auth } from '../firebaseConfig'; // Import Firebase auth
+import LoginPage from '../components/LoginPage'; // Import LoginPage
+import ProfilePage from '../components/ProfilePage'; // Import ProfilePage
+import Signup from '../components/SignUpPage'; // Import Signup page
 
 const Index = () => {
-    const [currentPage, setCurrentPage] = useState("login"); // State to handle which page is shown
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [showSignup, setShowSignup] = useState(false); // State to track if the user wants to sign up
 
-    const switchToSignup = () => {
-        setCurrentPage("signup"); // Switch to Signup
-    };
+    // Check authentication status on component mount
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            setIsAuthenticated(!!user); // Set to true if a user is authenticated, false otherwise
+        });
 
-    const switchToLogin = () => {
-        setCurrentPage("login"); // Switch back to Login
-    };
-
-    const onLoginSuccess = () => {
-        setCurrentPage("profile"); // Switch to Profile page on successful login
-    };
+        // Unsubscribe from the listener on unmount
+        return unsubscribe;
+    }, []);
 
     const handleLogout = () => {
-        setCurrentPage("login"); // Go back to Login on logout
+        setIsAuthenticated(false); // Set authentication to false when logging out
+    };
+
+    const handleLogin = () => {
+        setIsAuthenticated(true); // Set authentication to true when logging in
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            {currentPage === "login" && <LoginPage onSwitchToSignup={switchToSignup} onLoginSuccess={onLoginSuccess} />}
-            {currentPage === "signup" && <Signup onSwitchToLogin={switchToLogin} />}
-            {currentPage === "profile" && <ProfilePage onLogout={handleLogout} />}
-        </SafeAreaView>
+        <View style={styles.container}>
+            {isAuthenticated ? (
+                <ProfilePage onLogout={handleLogout} />
+            ) : showSignup ? (
+                <Signup onSwitchToLogin={() => setShowSignup(false)} />
+            ) : (
+                <LoginPage onSwitchToSignup={() => setShowSignup(true)} onLoginSuccess={handleLogin} />
+            )}
+        </View>
     );
 };
 

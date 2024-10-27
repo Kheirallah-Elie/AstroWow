@@ -19,14 +19,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     marginBottom: 10,
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(240, 240, 240, 0.85)', // Semi-transparent container
     borderRadius: 10,
     fontSize: 16,
+    marginTop:25,
   },
   dayContainer: {
     padding: 10,
     marginVertical: 10,
-    backgroundColor: 'rgba(240, 240, 240, 0.8)', // Semi-transparent container
+    backgroundColor: 'rgba(240, 240, 240, 0.7)', // Semi-transparent container
     borderRadius: 8,
   },
   dayTitle: {
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   buttonStyle: {
-    backgroundColor: '#4CAF50', // Green background for better contrast
+    backgroundColor: 'rgba(76, 175, 80, 0.85)', // Semi-transparent container
     paddingVertical: 6,
     paddingHorizontal: 24,
     borderRadius: 10, // Rounded corners
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   exitButtonStyle: {
-    backgroundColor: 'red', // Green background for better contrast
+    backgroundColor: 'rgba(255, 0, 0, 0.75)',
     paddingVertical: 6,
     paddingHorizontal: 24,
     borderRadius: 10, // Rounded corners
@@ -70,8 +71,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  geoButton:{
+    marginTop:15,
+    marginLeft: 10,
+    backgroundColor: 'rgba(255, 0, 0, 0.75)',
+    borderRadius: 5,
+  },
   suggestionsContainer: {
-    backgroundColor: 'white', // White background for suggestions
+    backgroundColor: 'rgba(240, 240, 240, 0.5)', // Semi-transparent container
     borderRadius: 8,
     elevation: 4, // Add shadow on Android
     maxHeight: 200, // Limit the height of the dropdown
@@ -100,7 +107,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 40,
-    backgroundColor: "white",
+    backgroundColor: 'rgba(240, 240, 240, 0.85)', // Semi-transparent container
     width: "100%",
     marginBottom: 10,
     paddingHorizontal: 10,
@@ -117,11 +124,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',       // Ensures the wrapper itself is centered horizontally
   },
   searchBar: {
+    marginTop: 25,
     marginBottom: 20,
     backgroundColor: 'transparent',
   },
   searchInput: {
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(240, 240, 240, 0.8)', // Semi-transparent container
   },
   imageContainer: {
     flex: 1,
@@ -129,7 +137,7 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: 'center',
     borderRadius: 8,
-    backgroundColor: 'rgba(240, 240, 240, 0.8)',
+    backgroundColor: 'rgba(240, 240, 240, 0.7)',
   },
   image: {
     width: 150,
@@ -148,13 +156,13 @@ const styles = StyleSheet.create({
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
     justifyContent: 'center',
     alignItems: 'center',
   },
   modalContent: {
     width: '80%',
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(240, 240, 240, 0.8)', // Semi-transparent container
     borderRadius: 10,
     padding: 20,
   },
@@ -191,6 +199,47 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 10,
   },
+  fieldContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(240, 240, 240, 0.85)',
+    padding: 10,
+    borderRadius: 8,
+    marginBottom: 10,
+    width: '100%',
+    justifyContent: 'space-between',
+},
+  fieldLabel: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      marginRight: 10,
+  },
+  fieldValue: {
+      fontSize: 16,
+      color: '#333',
+  },
+  editableTextInput: {
+      flex: 1,
+      backgroundColor: 'rgba(240, 240, 240, 0.85)',
+      padding: 8,
+      borderRadius: 5,
+      borderColor: '#ccc',
+      borderWidth: 1,
+      fontSize: 16,
+  },
+  editButtonText: {
+      color: '#007BFF',
+      fontSize: 14,
+      marginLeft: 10,
+      textDecorationLine: 'underline',
+  },
+  confirmButtonText: {
+      color: '#28a745',
+      fontSize: 14,
+      marginLeft: 10,
+      textDecorationLine: 'underline',
+  },
+
 });
 
 export default styles;

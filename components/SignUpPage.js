@@ -23,7 +23,7 @@ const Signup = ({ onSwitchToLogin }) => {
 
     return (
         <ImageBackground 
-            source={{ uri: 'https://img.freepik.com/free-vector/galaxy-background-vector-space-desktop-wallpaper_53876-136887.jpg?t=st=1729757615~exp=1729761215~hmac=513586a7b6ca3fc6945acb41a58b25df39b16d1d24d566043b54079c50d0d312&w=2000' }}
+            source={{ uri: 'https://cdn.pixabay.com/photo/2023/10/24/15/18/astronomy-8338435_1280.png' }}
             style={styles.backgroundImage}
         >
             <View style={styles.wrapper}>

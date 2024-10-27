@@ -25,12 +25,13 @@ export default function RootLayout() {
           tabBarInactiveTintColor: inactiveColor,
           headerShown: false,
           tabBarStyle: { 
-            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            backgroundColor: 'rgba(255, 255, 255, 0.06)',
             height: 100,
           },
         }}>
         
         {/* User Profile Tab */}
+        
         <Tabs.Screen
           name="index"
           options={{
@@ -45,10 +46,20 @@ export default function RootLayout() {
         <Tabs.Screen
           name="image"
           options={{
-            title: 'Image',
+            title: 'Images',
             tabBarIcon: ({ color }) => (
               <FontAwesome5 name="images" size={24} color={color} />
             ),
+          }}
+        />
+
+        {/* Weather Tab */}
+        <Tabs.Screen
+          name="upload"
+          options={{
+            title: 'Upload',
+            tabBarIcon: ({ color }) => (
+              <Entypo name="upload" size={24} color={color} />            ),
           }}
         />
 
@@ -63,15 +74,6 @@ export default function RootLayout() {
           }}
         />
 
-        {/* Weather Tab */}
-        <Tabs.Screen
-          name="upload"
-          options={{
-            title: 'Upload',
-            tabBarIcon: ({ color }) => (
-              <Entypo name="upload" size={24} color={color} />            ),
-          }}
-        />
       </Tabs>
     </ImageBackground>
   );

@@ -1,23 +1,45 @@
-import React, { useState } from "react";
-import { View, StyleSheet, ImageBackground, TextInput, Alert, Text, TouchableOpacity } from "react-native";
-import { auth } from '../firebaseConfig'; // Import Firebase Auth
-import { signOut } from 'firebase/auth'; // Import Firebase signOut
-import { getDatabase, ref, set } from 'firebase/database'; // Import Realtime Database functions
+import React, { useState, useEffect } from "react";
+import { View, ImageBackground, TextInput, Alert, Text, TouchableOpacity } from "react-native";
+import { auth } from '../firebaseConfig';
+import { signOut } from 'firebase/auth';
+import { getDatabase, ref, set, get, child } from 'firebase/database';
 import styles from './LayoutStyle';
 
 const ProfilePage = ({ onLogout }) => {
     const [username, setUsername] = useState("");
     const [age, setAge] = useState("");
     const [location, setLocation] = useState("");
+    const [editingField, setEditingField] = useState(null);
+
+    // Fetch user profile from Firebase on mount
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            const user = auth.currentUser;
+            if (user) {
+                const dbRef = ref(getDatabase());
+                try {
+                    const snapshot = await get(child(dbRef, `users/${user.uid}`));
+                    if (snapshot.exists()) {
+                        const data = snapshot.val();
+                        setUsername(data.username || "");
+                        setAge(data.age || "");
+                        setLocation(data.location || "");
+                    }
+                } catch (error) {
+                    Alert.alert("Failed to load profile", error.message);
+                }
+            }
+        };
+        fetchUserProfile();
+    }, []);
 
     const handleSaveProfile = async () => {
-        const user = auth.currentUser; // Get the currently logged-in user
-        if (user && username && age && location) {
-            const db = getDatabase(); // Get a reference to the database
-            const userProfileRef = ref(db, 'users/' + user.uid); // Create a reference to the user's profile data
-
+        const user = auth.currentUser;
+        if (user) {
+            const db = getDatabase();
+            const userProfileRef = ref(db, 'users/' + user.uid);
             try {
-                await set(userProfileRef, { // Save the profile data
+                await set(userProfileRef, {
                     username,
                     age,
                     location
@@ -26,57 +48,65 @@ const ProfilePage = ({ onLogout }) => {
             } catch (error) {
                 Alert.alert("Profile Update Failed", error.message);
             }
-        } else {
-            Alert.alert("Please fill in all fields");
         }
     };
 
     const handleLogout = async () => {
         try {
-            await signOut(auth); // Firebase sign-out
-            onLogout(); // Navigate back to the Login page
+            await signOut(auth);
+            onLogout();
         } catch (error) {
             Alert.alert("Logout Failed", error.message);
         }
     };
 
+    const toggleEdit = (field) => {
+        setEditingField(editingField === field ? null : field);
+    };
+
+    const renderEditableField = (field, value, setValue) => (
+        <View style={styles.fieldContainer}>
+            <Text style={styles.fieldLabel}>{field}:</Text>
+            {editingField === field ? (
+                <TextInput
+                    style={styles.editableTextInput}
+                    value={value}
+                    onChangeText={setValue}
+                    placeholder={`Enter ${field}`}
+                    keyboardType={field === "age" ? "numeric" : "default"}
+                />
+            ) : (
+                <Text style={styles.fieldValue}>{value}</Text>
+            )}
+            <TouchableOpacity onPress={() => toggleEdit(field)}>
+                <Text style={styles.editButtonText}>{editingField === field ? "Confirm" : "Edit"}</Text>
+            </TouchableOpacity>
+            {editingField === field && (
+                <TouchableOpacity onPress={handleSaveProfile}>
+                    <Text style={styles.confirmButtonText}>Save</Text>
+                </TouchableOpacity>
+            )}
+        </View>
+    );
+
     return (
-        <ImageBackground 
-            source={{ uri: 'https://img.freepik.com/free-vector/galaxy-background-vector-space-desktop-wallpaper_53876-136887.jpg?t=st=1729757615~exp=1729761215~hmac=513586a7b6ca3fc6945acb41a58b25df39b16d1d24d566043b54079c50d0d312&w=2000' }}
+        <ImageBackground
+            source={{ uri: 'https://cdn.pixabay.com/photo/2023/10/24/15/18/astronomy-8338435_1280.png' }}
             style={styles.backgroundImage}
         >
             <View style={styles.wrapper}>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Username"
-                    value={username}
-                    onChangeText={setUsername}
-                    placeholderTextColor="#888"
-                />
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Age"
-                    value={age}
-                    onChangeText={setAge}
-                    keyboardType="numeric"
-                    placeholderTextColor="#888"
-                />
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Location"
-                    value={location}
-                    onChangeText={setLocation}
-                    placeholderTextColor="#888"
-                />
+                {/* Username Field */}
+                {renderEditableField("Username", username, setUsername)}
 
-                {/* Custom Save Profile Button */}
-                <TouchableOpacity style={styles.buttonStyle} onPress={handleSaveProfile}>
-                    <Text style={styles.buttonText}>Save Profile</Text>
-                </TouchableOpacity>
+                {/* Age Field */}
+                {renderEditableField("Age", age, setAge)}
 
-                {/* Custom Logout Button */}
+                {/* Location Field */}
+                {renderEditableField("Location", location, setLocation)}
+
+                {/* Logout Button */}
                 <TouchableOpacity style={styles.exitButtonStyle} onPress={handleLogout}>
-                    <Text style={styles.buttonText}  >Logout</Text>
+                    <Text style={styles.buttonText}>Logout</Text>
                 </TouchableOpacity>
             </View>
         </ImageBackground>

@@ -1,12 +1,12 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import WeatherForecast from '../components/WeatherForecast';
 
 export default function TabTwoScreen() {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <WeatherForecast />
-    </SafeAreaView>
+    </View>
   );
 }
 
